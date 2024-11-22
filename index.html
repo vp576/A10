@@ -1,64 +1,96 @@
-
 <html>
 
 <head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
     <title>Cookies</title>
 	
     <style>
+	
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
         }
+		
     </style>
 	
 </head>
 
 
+
 <body>
 
     <h1>Cookie Example</h1>
+
+    <div id="inputSection">
 	
-	
-    <p>Enter a username:</p>
-    <input type="text" id="nameInput">
-    <button onclick="setCookie()">Save</button>
-	
-    <p id="cookieDisplay">Your cookie will show here</p>
-	
-	
+        <p>Enter a username:</p>
+        <input type="text" id="nameInput">
+        <button onclick="saveUsername()">Save</button>
+		
+    </div>
+
+    <p id="cookieDisplay"></p>
+
     <footer>
         <p>© A10 Assignment - Your Name - Due Date: [INSERT DUE DATE]</p>
     </footer>
-	
-	
+
     <script>
-	
-        function setCookie() {
+     
+		// Function to set a cookie
+		function setCookie(cname, cvalue, exdays) {
+		    const d = new Date();
+		    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+		    let expires = "expires=" + d.toUTCString();
+		    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+		}
+
+		// Function to get a cookie
+		function getCookie(cname) {
+		    let name = cname + "=";
+		    let ca = document.cookie.split(';');
+		    for (let i = 0; i < ca.length; i++) {
+		        let c = ca[i];
+		        while (c.charAt(0) == ' ') {
+		            c = c.substring(1);
+		        }
+		        if (c.indexOf(name) == 0) {
+		            return c.substring(name.length, c.length);
+		        }
+		    }
+		    return "";
+		}
+
+		// Function to display the cookie or the input box
+		function displayCookie() {
+		    let user = getCookie("username");
+		    if (user != "") {
+		        document.getElementById("cookieDisplay").innerText = "Welcome back, " + user + "!";
+		        document.getElementById("inputSection").style.display = "none";
+		    } else {
+		        document.getElementById("cookieDisplay").innerText = "";
+		        document.getElementById("inputSection").style.display = "block";
+		    }
+		}
+
+		// Function to save the username in a cookie
+		function saveUsername() {
+		    let user = document.getElementById("nameInput").value;
+		    if (user != "") {
+		        setCookie("username", user, 365);
+		        alert("Cookie saved! Refresh the page to see the greeting.");
+		    } else {
+		        alert("Please enter a username!");
+		    }
+		    displayCookie();
+		}
+
+		// Display cookie information on page load
+		displayCookie();
 		
-            const name = document.getElementById("nameInput").value;\
-			
-            if (name) {
-                document.cookie = "username=" + name + "; path=/";
-                //alert("Cookie has been saved!");
-            } else {
-                alert("Please enter a name!");
-            }
-            displayCookie();
-        }
-
-        function displayCookie() {
-            const allCookies = document.cookie;
-            document.getElementById("cookieDisplay").innerText = "Saved username: " + allCookies;
-        }
-
-        // Show cookie when the page loads
-        displayCookie();
     </script>
-	
 </body>
 </html>
