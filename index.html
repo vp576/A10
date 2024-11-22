@@ -22,19 +22,29 @@
 <body>
 
     <h1>Cookie Example</h1>
-    <p>Enter your name:</p>
+	
+	
+    <p>Enter a username:</p>
     <input type="text" id="nameInput">
-    <button onclick="setCookie()">Save Cookie</button>
+    <button onclick="setCookie()">Save</button>
+	
     <p id="cookieDisplay">Your cookie will show here</p>
+	
+	
     <footer>
         <p>© A10 Assignment - Your Name - Due Date: [INSERT DUE DATE]</p>
     </footer>
+	
+	
     <script>
+	
         function setCookie() {
-            const name = document.getElementById("nameInput").value;
+		
+            const name = document.getElementById("nameInput").value;\
+			
             if (name) {
                 document.cookie = "username=" + name + "; path=/";
-                alert("Cookie has been saved!");
+                //alert("Cookie has been saved!");
             } else {
                 alert("Please enter a name!");
             }
@@ -43,7 +53,7 @@
 
         function displayCookie() {
             const allCookies = document.cookie;
-            document.getElementById("cookieDisplay").innerText = "Saved Cookie: " + allCookies;
+            document.getElementById("cookieDisplay").innerText = "Saved username: " + allCookies;
         }
 
         // Show cookie when the page loads
