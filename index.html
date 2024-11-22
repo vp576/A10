@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cookie Example</h1>
+    <p>Enter your name:</p>
+    <input type="text" id="nameInput">
+    <button onclick="setCookie()">Save Cookie</button>
+    <p id="cookieDisplay">Your cookie will show here</p>
+    <footer>
+        <p>© A10 Assignment - Your Name - Due Date: [INSERT DUE DATE]</p>
+    </footer>
+    <script>
+        function setCookie() {
+            const name = document.getElementById("nameInput").value;
+            if (name) {
+                document.cookie = "username=" + name + "; path=/";
+                alert("Cookie has been saved!");
+            } else {
+                alert("Please enter a name!");
+            }
+            displayCookie();
+        }
+
+        function displayCookie() {
+            const allCookies = document.cookie;
+            document.getElementById("cookieDisplay").innerText = "Saved Cookie: " + allCookies;
+        }
+
+        // Show cookie when the page loads
+        displayCookie();
+    </script>
+</body>
+</html>
