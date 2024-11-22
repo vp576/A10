@@ -8,6 +8,7 @@
     <title>Cookies</title>
 	
     <style>
+	    
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -18,6 +19,7 @@
             display: none;
             margin-top: 20px;
         }
+	    
     </style>
 	
 </head>
@@ -27,27 +29,27 @@
     <h1>Cookie Example</h1>
 
     <div id="inputSection">
+	    
         <p>Enter a username:</p>
         <input type="text" id="nameInput">
         <button onclick="saveUsername()">Save</button>
+	    
     </div>
 
     <p id="cookieDisplay"></p>
-
     <button id="reEnterButton" onclick="enableInput()">Re-enter Username</button>
-
-    <footer>
-        <p>© Viswa Puligedda 11/20/2024</p>
-    </footer>
 
     <script>
 		function setCookie(cname, cvalue, exdays) {
+			
 		    const d = new Date();
 		    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
 		    document.cookie = cname + "=" + cvalue + ";expires=" + d.toUTCString() + ";path=/";
 		}
 
+	    
 		function getCookie(cname) {
+			
 		    let name = cname + "=";
 		    let cookies = document.cookie.split(';');
 		    for (let i = 0; i < cookies.length; i++) {
@@ -56,11 +58,15 @@
 		            return c.substring(name.length, c.length);
 		        }
 		    }
+			
 		    return "";
 		}
 
+	    
 		function displayCookie() {
+			
 		    let user = getCookie("username");
+			
 		    if (user) {
 		        document.getElementById("cookieDisplay").innerText = "Welcome back, " + user + "!";
 		        document.getElementById("inputSection").style.display = "none";
@@ -72,8 +78,11 @@
 		    }
 		}
 
+	    
 		function saveUsername() {
+			
 		    let user = document.getElementById("nameInput").value;
+			
 		    if (user) {
 		        setCookie("username", user, 365);
 			alert("Cookie saved! Refresh the page to see the greeting."); 
@@ -81,7 +90,9 @@
 		    }
 		}
 
+	    
 		function enableInput() {
+			
 		    document.getElementById("inputSection").style.display = "block";
 		    document.getElementById("reEnterButton").style.display = "none";
 		    document.getElementById("nameInput").value = "";
@@ -90,6 +101,13 @@
 
 		displayCookie();
     </script>
+
+
+   <footer>
+		
+        <p>© Viswa Puligedda 11/20/2024</p>
+		
+   </footer>
 	
 </body>
 </html>
