@@ -76,6 +76,7 @@
 		    let user = document.getElementById("nameInput").value;
 		    if (user) {
 		        setCookie("username", user, 365);
+			alert("Cookie saved! Refresh the page to see the greeting."); 
 		        document.getElementById("nameInput").value = "";
 		    }
 		}
