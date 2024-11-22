@@ -1,3 +1,4 @@
+
 <html>
 
 <head>
@@ -7,13 +8,16 @@
     <title>Cookies</title>
 	
     <style>
-	
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
         }
-		
+
+        #reEnterButton {
+            display: none;
+            margin-top: 20px;
+        }
     </style>
 	
 </head>
@@ -23,38 +27,31 @@
     <h1>Cookie Example</h1>
 
     <div id="inputSection">
-	
         <p>Enter a username:</p>
         <input type="text" id="nameInput">
         <button onclick="saveUsername()">Save</button>
-		
     </div>
 
     <p id="cookieDisplay"></p>
-
-    <button id="reEnterButton" onclick="enableInput()" style="display: none;">Re-enter Username</button>
+	
+    <button id="reEnterButton" onclick="enableInput()">Re-enter Username</button>
 
     <footer>
         <p>© Viswa Puligedda 11/20/2024</p>
     </footer>
 
     <script>
-		
 		function setCookie(cname, cvalue, exdays) {
 		    const d = new Date();
 		    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-		    let expires = "expires=" + d.toUTCString();
-		    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+		    document.cookie = cname + "=" + cvalue + ";expires=" + d.toUTCString() + ";path=/";
 		}
 
 		function getCookie(cname) {
 		    let name = cname + "=";
-		    let ca = document.cookie.split(';');
-		    for (let i = 0; i < ca.length; i++) {
-		        let c = ca[i];
-		        while (c.charAt(0) == ' ') {
-		            c = c.substring(1);
-		        }
+		    let cookies = document.cookie.split(';');
+		    for (let i = 0; i < cookies.length; i++) {
+		        let c = cookies[i].trim();
 		        if (c.indexOf(name) == 0) {
 		            return c.substring(name.length, c.length);
 		        }
@@ -64,10 +61,10 @@
 
 		function displayCookie() {
 		    let user = getCookie("username");
-		    if (user != "") {
+		    if (user) {
 		        document.getElementById("cookieDisplay").innerText = "Welcome back, " + user + "!";
 		        document.getElementById("inputSection").style.display = "none";
-		        document.getElementById("reEnterButton").style.display = "block";
+		        document.getElementById("reEnterButton").style.display = "inline-block";
 		    } else {
 		        document.getElementById("cookieDisplay").innerText = "";
 		        document.getElementById("inputSection").style.display = "block";
@@ -77,24 +74,24 @@
 
 		function saveUsername() {
 		    let user = document.getElementById("nameInput").value;
-		    if (user != "") {
+		    if (user) {
 		        setCookie("username", user, 365);
 		        alert("Cookie saved! Refresh the page to see the greeting.");
+		        displayCookie();
 		    } else {
 		        alert("Please enter a username!");
 		    }
-		    displayCookie();
 		}
 
 		function enableInput() {
 		    document.getElementById("inputSection").style.display = "block";
 		    document.getElementById("reEnterButton").style.display = "none";
-		    document.getElementById("nameInput").value = ""; // Clear input field
-		    document.getElementById("cookieDisplay").innerText = ""; // Clear displayed message
+		    document.getElementById("nameInput").value = "";
+		    document.getElementById("cookieDisplay").innerText = "";
 		}
 
 		displayCookie();
-
     </script>
+	
 </body>
 </html>
