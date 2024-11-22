@@ -18,8 +18,6 @@
 	
 </head>
 
-
-
 <body>
 
     <h1>Cookie Example</h1>
@@ -34,13 +32,14 @@
 
     <p id="cookieDisplay"></p>
 
+    <button id="reEnterButton" onclick="enableInput()" style="display: none;">Re-enter Username</button>
+
     <footer>
-        <p>© A10 Assignment - Your Name - Due Date: [INSERT DUE DATE]</p>
+        <p>© Viswa Puligedda 11/20/2024</p>
     </footer>
 
     <script>
-     
-		// Function to set a cookie
+		
 		function setCookie(cname, cvalue, exdays) {
 		    const d = new Date();
 		    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -48,7 +47,6 @@
 		    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 		}
 
-		// Function to get a cookie
 		function getCookie(cname) {
 		    let name = cname + "=";
 		    let ca = document.cookie.split(';');
@@ -64,19 +62,19 @@
 		    return "";
 		}
 
-		// Function to display the cookie or the input box
 		function displayCookie() {
 		    let user = getCookie("username");
 		    if (user != "") {
 		        document.getElementById("cookieDisplay").innerText = "Welcome back, " + user + "!";
 		        document.getElementById("inputSection").style.display = "none";
+		        document.getElementById("reEnterButton").style.display = "block";
 		    } else {
 		        document.getElementById("cookieDisplay").innerText = "";
 		        document.getElementById("inputSection").style.display = "block";
+		        document.getElementById("reEnterButton").style.display = "none";
 		    }
 		}
 
-		// Function to save the username in a cookie
 		function saveUsername() {
 		    let user = document.getElementById("nameInput").value;
 		    if (user != "") {
@@ -88,9 +86,15 @@
 		    displayCookie();
 		}
 
-		// Display cookie information on page load
+		function enableInput() {
+		    document.getElementById("inputSection").style.display = "block";
+		    document.getElementById("reEnterButton").style.display = "none";
+		    document.getElementById("nameInput").value = ""; // Clear input field
+		    document.getElementById("cookieDisplay").innerText = ""; // Clear displayed message
+		}
+
 		displayCookie();
-		
+
     </script>
 </body>
 </html>
